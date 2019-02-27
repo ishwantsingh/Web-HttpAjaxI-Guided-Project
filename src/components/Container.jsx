@@ -96,7 +96,7 @@ export default class Container extends React.Component {
     if (this.state.error) {
       return (
         <StyledContainer>
-          Argh! This failed rather miserably. {this.state.error.message}
+          <div>Argh! This failed rather miserably. {this.state.error.message}</div>
           <button onClick={this.fakeFetchPerson}>fetch again</button>
         </StyledContainer>
       );
