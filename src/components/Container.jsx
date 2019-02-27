@@ -23,19 +23,20 @@ export default class Container extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchPerson();
+    this.doFakeRequest();
   }
 
   fetchPerson = () => {
+    this.resetError();
     this.startSpinner();
     // fetch('http://demo6368739.mockable.io/')
     //   .then(data => data.json())
     //   .then(this.setPerson)
     //   .catch(this.setError);
 
-    axios.get('http://demo6368739.mockable.io/')
-      .then(res => this.setPerson(res.data))
-      .catch(this.setError);
+    // axios.get('http://demo6368739.mockable.io/')
+    //   .then(res => this.setPerson(res.data))
+    //   .catch(this.setError);
 
     // $.ajax({
     //   url: 'http://demo6368739.mockable.i/',
@@ -44,13 +45,23 @@ export default class Container extends React.Component {
     // });
   }
 
+  doFakeRequest = () => {
+    this.startSpinner();
+    this.resetError();
+    this.fakeFetchPerson()
+      .then(this.setPerson)
+      .catch(this.setError);
+  }
+
   fakeFetchPerson = () => {
     return new Promise((resolve, reject) => {
-      if (Math.floor(Math.random * 2) % 2 === 0) {
-        resolve({ id: '1', name: 'Samar', age: 25 });
-      } else {
-        reject(new Error({ message: 'This did not fly' }));
-      }
+      setTimeout(() => {
+        if ((Math.floor(Math.random() * 2)) % 2 === 0) {
+          resolve({ id: '1', name: 'Samar', age: 25 });
+        } else {
+          reject({ message: 'This did not fly' });
+        }
+      }, 1000);
     });
   }
 
@@ -60,8 +71,13 @@ export default class Container extends React.Component {
   }
 
   setError = error => {
+    // debugger
     this.stopSpinner();
     this.setState({ error });
+  }
+
+  resetError = () => {
+    this.setState({ error: null });
   }
 
   startSpinner = () => this.setState({ loading: true })
@@ -81,6 +97,7 @@ export default class Container extends React.Component {
       return (
         <StyledContainer>
           Argh! This failed rather miserably. {this.state.error.message}
+          <button onClick={this.doFakeRequest}>fetch again</button>
         </StyledContainer>
       );
     }
@@ -92,7 +109,7 @@ export default class Container extends React.Component {
             <div>
               <div>Name: {this.state.person.name}</div>
               <div>Age: {this.state.person.age}</div>
-              <button onClick={this.fetchPerson}>fetch again</button>
+              <button onClick={this.doFakeRequest}>fetch again</button>
             </div>
           )
         }
