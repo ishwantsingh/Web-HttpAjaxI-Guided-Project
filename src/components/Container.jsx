@@ -27,12 +27,14 @@ export default class Container extends React.Component {
   }
 
   fetchPerson = () => {
+    this.startSpinner();
     fetch('http://demo6368739.mockable.io/')
       .then(data => data.json())
       .then(this.setPerson);
   }
 
   setPerson = person => {
+    this.stopSpinner();
     this.setState({ person });
   }
 
@@ -45,6 +47,13 @@ export default class Container extends React.Component {
   stopSpinner = () => this.setState({ loading: false })
 
   render() {
+    if (this.state.loading) {
+      return (
+        <StyledContainer>
+          Loading...
+        </StyledContainer>
+      );
+    }
     return (
       <StyledContainer>
         {
@@ -52,6 +61,7 @@ export default class Container extends React.Component {
             <div>
               <div>Name: {this.state.person.name}</div>
               <div>Age: {this.state.person.age}</div>
+              <button onClick={this.fetchPerson}>fetch again</button>
             </div>
           )
         }
