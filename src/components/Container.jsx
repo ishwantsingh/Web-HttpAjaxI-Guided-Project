@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import $ from 'jquery';
+import $ from 'jquery';
 import axios from 'axios';
 
 
@@ -33,9 +33,15 @@ export default class Container extends React.Component {
     //   .then(this.setPerson)
     //   .catch(this.setError);
 
-    axios.get('http://demo6368739.mockable.i/')
-      .then(res => this.setPerson(res.data))
-      .catch(this.setError);
+    // axios.get('http://demo6368739.mockable.i/')
+    //   .then(res => this.setPerson(res.data))
+    //   .catch(this.setError);
+
+    $.ajax({
+      url: 'http://demo6368739.mockable.io/',
+      success: this.setPerson,
+      error: this.setError,
+    });
   }
 
   setPerson = person => {
@@ -44,6 +50,7 @@ export default class Container extends React.Component {
   }
 
   setError = error => {
+    debugger
     console.dir(error);
     this.stopSpinner();
     this.setState({ error });
