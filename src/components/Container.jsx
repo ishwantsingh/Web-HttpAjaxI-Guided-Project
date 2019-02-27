@@ -28,9 +28,10 @@ export default class Container extends React.Component {
 
   fetchPerson = () => {
     this.startSpinner();
-    fetch('http://demo6368739.mockable.io/')
+    fetch('http://demo6368739.mockable.i/')
       .then(data => data.json())
-      .then(this.setPerson);
+      .then(this.setPerson)
+      .catch(this.setError);
   }
 
   setPerson = person => {
@@ -39,6 +40,7 @@ export default class Container extends React.Component {
   }
 
   setError = error => {
+    console.dir(error);
     this.setState({ error });
   }
 
@@ -54,6 +56,7 @@ export default class Container extends React.Component {
         </StyledContainer>
       );
     }
+
     return (
       <StyledContainer>
         {
