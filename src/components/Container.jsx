@@ -19,7 +19,7 @@ export default class Container extends React.Component {
   state = {
     person: null,
     error: null,
-    loading: true,
+    loading: false,
   }
 
   componentDidMount() {
@@ -27,7 +27,9 @@ export default class Container extends React.Component {
   }
 
   fetchPerson = () => {
-    console.log('fetching!');
+    fetch('http://demo6368739.mockable.io/')
+      .then(data => data.json())
+      .then(this.setPerson);
   }
 
   setPerson = person => {
