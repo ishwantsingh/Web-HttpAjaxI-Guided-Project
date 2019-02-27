@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 // import $ from 'jquery';
-// import axios from 'axios';
+import axios from 'axios';
 
 
 const StyledContainer = styled.div`
@@ -28,10 +28,12 @@ export default class Container extends React.Component {
 
   fetchPerson = () => {
     this.startSpinner();
-    fetch('http://demo6368739.mockable.io/')
-      .then(data => data.json())
-      .then(this.setPerson)
-      .catch(this.setError);
+    // fetch('http://demo6368739.mockable.io/')
+    //   .then(data => data.json())
+    //   .then(this.setPerson)
+    //   .catch(this.setError);
+    axios.get('http://demo6368739.mockable.io/')
+      .then(person => this.setPerson(person.data));
   }
 
   setPerson = person => {
