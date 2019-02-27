@@ -33,7 +33,7 @@ export default class Container extends React.Component {
     //   .then(this.setPerson)
     //   .catch(this.setError);
     axios.get('http://demo6368739.mockable.io/')
-      .then(person => this.setPerson(person.data));
+      .then(res => this.setPerson(res.data));
   }
 
   setPerson = person => {
