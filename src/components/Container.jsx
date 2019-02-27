@@ -32,8 +32,10 @@ export default class Container extends React.Component {
     //   .then(data => data.json())
     //   .then(this.setPerson)
     //   .catch(this.setError);
-    axios.get('http://demo6368739.mockable.io/')
-      .then(res => this.setPerson(res.data));
+
+    axios.get('http://demo6368739.mockable.i/')
+      .then(res => this.setPerson(res.data))
+      .catch(this.setError);
   }
 
   setPerson = person => {
