@@ -47,7 +47,14 @@ export default class Container extends React.Component {
   render() {
     return (
       <StyledContainer>
-        HTTP/AJAX
+        {
+          this.state.person && (
+            <div>
+              <div>Name: {this.state.person.name}</div>
+              <div>Age: {this.state.person.age}</div>
+            </div>
+          )
+        }
       </StyledContainer>
     );
   }
