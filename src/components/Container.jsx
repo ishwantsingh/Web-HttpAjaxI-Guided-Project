@@ -33,14 +33,24 @@ export default class Container extends React.Component {
     //   .then(this.setPerson)
     //   .catch(this.setError);
 
-    // axios.get('http://demo6368739.mockable.i/')
-    //   .then(res => this.setPerson(res.data))
-    //   .catch(this.setError);
+    axios.get('http://demo6368739.mockable.io/')
+      .then(res => this.setPerson(res.data))
+      .catch(this.setError);
 
-    $.ajax({
-      url: 'http://demo6368739.mockable.i/',
-      success: this.setPerson,
-      error: err => this.setError({ message: err.statusText }),
+    // $.ajax({
+    //   url: 'http://demo6368739.mockable.i/',
+    //   success: this.setPerson,
+    //   error: err => this.setError({ message: err.statusText }),
+    // });
+  }
+
+  fakeFetchPerson = () => {
+    return new Promise((resolve, reject) => {
+      if (Math.floor(Math.random * 2) % 2 === 0) {
+        resolve({ id: '1', name: 'Samar', age: 25 });
+      } else {
+        reject(new Error({ message: 'This did not fly' }));
+      }
     });
   }
 
@@ -50,7 +60,6 @@ export default class Container extends React.Component {
   }
 
   setError = error => {
-    console.dir(error);
     this.stopSpinner();
     this.setState({ error });
   }
