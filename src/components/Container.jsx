@@ -15,6 +15,18 @@ const StyledContainer = styled.div`
   }
 `;
 
+const doFakeAjax = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if ((Math.floor(Math.random() * 2)) % 2 === 0) {
+        resolve({ id: '1', name: 'Samar', age: 25 });
+      } else {
+        reject({ message: 'No joy.' });
+      }
+    }, 1000);
+  });
+};
+
 export default class Container extends React.Component {
   state = {
     person: null,
@@ -39,7 +51,7 @@ export default class Container extends React.Component {
     //   .catch(this.setError);
 
     // $.ajax({
-    //   url: 'http://demo6368739.mockable.i/',
+    //   url: 'http://demo6368739.mockable.io/',
     //   success: this.setPerson,
     //   error: err => this.setError({ message: err.statusText }),
     // });
@@ -48,21 +60,9 @@ export default class Container extends React.Component {
   fakeFetchPerson = () => {
     this.startSpinner();
     this.resetError();
-    this.doFakeAjax()
+    doFakeAjax('http://demo6368739.mockable.io/')
       .then(this.setPerson)
       .catch(this.setError);
-  }
-
-  doFakeAjax = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if ((Math.floor(Math.random() * 2)) % 2 === 0) {
-          resolve({ id: '1', name: 'Samar', age: 25 });
-        } else {
-          reject({ message: 'This did not fly' });
-        }
-      }, 1000);
-    });
   }
 
   setPerson = person => {
