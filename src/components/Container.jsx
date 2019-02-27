@@ -41,6 +41,7 @@ export default class Container extends React.Component {
 
   setError = error => {
     console.dir(error);
+    this.stopSpinner();
     this.setState({ error });
   }
 
@@ -53,6 +54,14 @@ export default class Container extends React.Component {
       return (
         <StyledContainer>
           Loading...
+        </StyledContainer>
+      );
+    }
+
+    if (this.state.error) {
+      return (
+        <StyledContainer>
+          Argh! This failed rather miserably. {this.state.error.message}
         </StyledContainer>
       );
     }
