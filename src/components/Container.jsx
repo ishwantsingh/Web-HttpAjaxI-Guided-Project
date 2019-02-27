@@ -38,9 +38,9 @@ export default class Container extends React.Component {
     //   .catch(this.setError);
 
     $.ajax({
-      url: 'http://demo6368739.mockable.io/',
+      url: 'http://demo6368739.mockable.i/',
       success: this.setPerson,
-      error: this.setError,
+      error: err => this.setError({ message: err.statusText }),
     });
   }
 
@@ -50,7 +50,6 @@ export default class Container extends React.Component {
   }
 
   setError = error => {
-    debugger
     console.dir(error);
     this.stopSpinner();
     this.setState({ error });
