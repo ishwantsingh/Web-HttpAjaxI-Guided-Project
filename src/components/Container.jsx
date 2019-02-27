@@ -23,7 +23,7 @@ export default class Container extends React.Component {
   }
 
   componentDidMount() {
-    this.doFakeRequest();
+    this.fakeFetchPerson();
   }
 
   fetchPerson = () => {
@@ -45,15 +45,15 @@ export default class Container extends React.Component {
     // });
   }
 
-  doFakeRequest = () => {
+  fakeFetchPerson = () => {
     this.startSpinner();
     this.resetError();
-    this.fakeFetchPerson()
+    this.doFakeAjax()
       .then(this.setPerson)
       .catch(this.setError);
   }
 
-  fakeFetchPerson = () => {
+  doFakeAjax = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if ((Math.floor(Math.random() * 2)) % 2 === 0) {
@@ -97,7 +97,7 @@ export default class Container extends React.Component {
       return (
         <StyledContainer>
           Argh! This failed rather miserably. {this.state.error.message}
-          <button onClick={this.doFakeRequest}>fetch again</button>
+          <button onClick={this.fakeFetchPerson}>fetch again</button>
         </StyledContainer>
       );
     }
@@ -109,7 +109,7 @@ export default class Container extends React.Component {
             <div>
               <div>Name: {this.state.person.name}</div>
               <div>Age: {this.state.person.age}</div>
-              <button onClick={this.doFakeRequest}>fetch again</button>
+              <button onClick={this.fakeFetchPerson}>fetch again</button>
             </div>
           )
         }
