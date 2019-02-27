@@ -28,7 +28,7 @@ export default class Container extends React.Component {
 
   fetchPerson = () => {
     this.startSpinner();
-    fetch('http://demo6368739.mockable.i/')
+    fetch('http://demo6368739.mockable.io/')
       .then(data => data.json())
       .then(this.setPerson)
       .catch(this.setError);
