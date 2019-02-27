@@ -16,6 +16,24 @@ const StyledContainer = styled.div`
 `;
 
 export default class Container extends React.Component {
+  state = {
+    person: null,
+    error: null,
+    loading: true,
+  }
+
+  setPerson = person => {
+    this.setState({ person });
+  }
+
+  setError = error => {
+    this.setState({ error });
+  }
+
+  startSpinner = () => this.setState({ loading: true })
+
+  stopSpinner = () => this.setState({ loading: false })
+
   render() {
     return (
       <StyledContainer>
