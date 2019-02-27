@@ -22,6 +22,14 @@ export default class Container extends React.Component {
     loading: true,
   }
 
+  componentDidMount() {
+    this.fetchPerson();
+  }
+
+  fetchPerson = () => {
+    console.log('fetching!');
+  }
+
   setPerson = person => {
     this.setState({ person });
   }
